@@ -18,7 +18,7 @@ class ExceptionHandler
      * @return void
      * @throws \Exception
      */
-    public function handleException(\Exception $exception): void
+    public function handleException(\Exception $exception)
     {
         $handlers = Config::get('core.handlers');
         

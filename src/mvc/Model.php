@@ -5,6 +5,7 @@ namespace ItForFree\SimpleMVC\mvc;
 use ItForFree\SimpleMVC\Config as Config;
 use ItForFree\SimpleMVC\Application;
 use ItForFree\rusphp\Log\SimpleEchoLog;
+//use ItForFree\SimpleMVC\mvc\Model;
 
 /**
  * Базовый класс для модолей: используя конфиг приложения,
@@ -32,7 +33,7 @@ class Model
      * 
      * @param array $data необязательный массив для инициаллизации свойств объекта модели
      */
-    public function __construct($data = null) 
+    public function __construct($data = null)
     {
         // $this->setPdoSettings();
         if (is_array($data)) {
@@ -45,9 +46,8 @@ class Model
      * 
      * @staticvar type $pdo
      * @param string $name
-     * @return type
      */
-    public function  __get (string $name)
+    public function  __get (string $name): \PDO
     {
 	static $pdo = null;
 	if ($name === 'pdo') {
@@ -67,7 +67,7 @@ class Model
      * @param object $object объект, свойства которого требуется заполнить значениями из массива $vars
      * @param array $vars  ассоциативный массив значений
      */
-    private function setObjectVars($object, array $vars) 
+    private function setObjectVars($object, array $vars): void 
     {
         $has = get_object_vars($object);
         foreach ($has as $name => $oldValue) {
@@ -78,10 +78,8 @@ class Model
     /**
      *  Устанавливает настройки доступа к БД и сохраяет объект PDO в одноименное свойство модели
      *  ($this->pdo)
-     * 
-     * @return \PDO
      */
-    protected function setPdoSettings()
+    protected function setPdoSettings(): \PDO
     {
         $dbSettings = Application::getConfigElement('core.db');
         $pdo = new \PDO($dbSettings['dns'], 
@@ -99,10 +97,8 @@ class Model
      * 
      * @param int    $id         id строки (кортежа)
      * @param string $tableName  имя таблицы (необязатлеьный параметр)
-     * 
-     * @return \ItForFree\SimpleMVC\mvc\Model
      */
-    public function getById($id, $tableName = '')
+    public function getById($id, $tableName = ''): ?Model
     {  
         $tableName = !empty($tableName) ? $tableName : $this->tableName;
         
@@ -189,9 +185,8 @@ class Model
      * @todo проверить нужность.
      * 
      * @param array $arr массив значений
-     * @return \ItForFree\SimpleMVC\mvc\modelClassName
      */
-    public function loadFromArray($arr)
+    public function loadFromArray($arr): Model
     {
         $modelClassName = static::class;
         return new $modelClassName($arr);
@@ -200,7 +195,7 @@ class Model
     /**
      * Удаляем запись для данной модели из базы данных.
      */
-    public function delete() 
+    public function delete(): void
     {
         $st = $this->pdo->prepare("DELETE FROM $this->tableName WHERE id = :id LIMIT 1" );
         $st->bindValue( ":id", $this->id, \PDO::PARAM_INT );

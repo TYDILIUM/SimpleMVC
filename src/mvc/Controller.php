@@ -34,7 +34,7 @@ class Controller
      * 
      * @param string $path
      */
-    public function redirect($path) { // 302 редирект
+    public function redirect($path): void { // 302 редирект
         header("Location: $path");
     }
 }

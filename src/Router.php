@@ -140,7 +140,7 @@ class Router
      * Формирует имя метода контроллера по GET-параметру
      * @param type $action -- строка GET-параметр
      */
-    public function getControllerMethodName($action)
+    public function getControllerMethodName($action): string
     {
         return $action . 'Action';
     }
@@ -148,7 +148,7 @@ class Router
     /**
      * Возвращает путь до файла контроллера относительно корневой дирректории
      * @param type $controllerName
-     * @return type string
+     * @return string
      */
     private function getControllerFileName($controllerName)
     {

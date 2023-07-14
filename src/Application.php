@@ -39,9 +39,8 @@ class Application
      * Метод для получения текущего объекта приложения
      * 
      * @staticvar type $instance
-     * @return ItForFree\SimpleMVC\Applicaion объект приложения
      */
-    public static function get()
+    public static function get(): Application
     {
         static $instance = null; // статическая переменная
         if (null === $instance) { // проверка существования
@@ -50,13 +49,13 @@ class Application
         return $instance;
     }
     
-    public static function addElementToConteiner($configPath, $element)
+    public static function addElementToConteiner($configPath, $element): void
     {
         
         self::get()->containerElements['elements'][$configPath] = $element;
     }
 	
-	public static function addObjectToConteiner($configPath, $object)
+	public static function addObjectToConteiner($configPath, $object): void
     {
         self::get()->containerElements['objects'][$configPath] = $object;
     }
@@ -170,7 +169,7 @@ class Application
 		$className, 
 		$constructParams = [],
 		$publicParams = [], 
-		$singletoneInstanceAccessStaticMethodName = 'get')
+		$singletoneInstanceAccessStaticMethodName = 'get'): object
     { 
        $result = null;
        if (\ItForFree\rusphp\PHP\Object\ObjectClass\Constructor::isPublic($className)) {
@@ -195,19 +194,21 @@ class Application
        return $result;
     }
     
-    protected static function getPathParams($PathClassName, $additionPart) 
+    protected static function getPathParams($PathClassName, $additionPart): string 
     {
         
         $pathParams = explode('.', $PathClassName);
         return $pathParams[0] . '.' . $pathParams[1] . '.' . $additionPart;
     }
 
-    protected static function isAlias($param)
+    protected static function isAlias($param): ?true 
     {
-        if(strpos($param, '@') === 0) return true;
+	if (strpos($param, '@') === 0) {
+	    return true;
+	}
     }
-    
-    protected static function getPablicParams($inConfigArrayPath) 
+
+    protected static function getPablicParams($inConfigArrayPath): array 
     {
         $publicParams = array();
         $paramsPath = static::getPathParams($inConfigArrayPath, 'params');
@@ -226,7 +227,7 @@ class Application
         return $publicParams;                    
     }
     
-    protected static function getCounstractParams($inConfigArrayPath)
+    protected static function getCounstractParams($inConfigArrayPath): array
     {
         $readyCounstractParams = array();
         $pathConstructParams = static::getPathParams($inConfigArrayPath, 'construct');
@@ -250,7 +251,7 @@ class Application
      * Возвращает объект или элемент, созданный
      * на основе переданного параметр
      */
-    public static function getInstanceByAlias($param)
+    public static function getInstanceByAlias($param): ?object
     {
         //возвращает объект или элемент взависимости от того, есть ли в конфиге у переданного пути часть "класс".
         //Вызывает isClassOrSimpleElement как раз для этой проверки
@@ -268,7 +269,7 @@ class Application
      * Проверяет: можно ли создать объект класса по переданному пути или нет
      * Возвращает true/false
      */
-    public static function isClassOrSimpleElement($paramPath)
+    public static function isClassOrSimpleElement($paramPath): bool
     {       
         $pathToClass = implode('.', $paramPath) . '.class';
         $class = self::getConfigElement($pathToClass, false);

@@ -38,8 +38,8 @@ class View
      * @param string $layoutPath путь к шаблону относительно $this->layoutsBasePath
      */
     public function __construct($layoutPath = 'default.php') {
-        $this->templateBasepath = 
-            rpath(Config::get('core.mvc.views.base-template-path'));
+        $this->templateBasePath = 
+		rpath(Config::get('core.mvc.views.base-template-path'));
         $this->layoutsBasePath = rpath(Config::get('core.mvc.views.base-layouts-path'));
         $this->layoutPath = $this->layoutsBasePath . $layoutPath;
     }
@@ -51,7 +51,7 @@ class View
      * @param string $name  имя будущей переменной в представлени
      * @param mixed $value  значение
      */
-    public function addVar(string $name, $value)
+    public function addVar(string $name, $value): void
     {
         $this->vars[$name] = $value;
     }
@@ -64,7 +64,7 @@ class View
      * @param string $viewFilePath         Путь к файду представления относительно базовой папки представлений
      * @param string $layoutPath  Относитлеьный путь к файлу шаблона -- передавайте только если требуется переопределить шаблон, который передаётся в конструктор представления
      */
-    public function render($viewFilePath, $layoutPath = '')
+    public function render($viewFilePath, $layoutPath = ''): void
     {
         if($layoutPath) {
            $layoutPath = $this->layoutsBasePath . $layoutPath; 
@@ -76,7 +76,7 @@ class View
         extract($this->vars); // распаковываем переменные, переданные в представление (VIEW)
         
         ob_start(); // перехватываем поток вывода
-        include($this->templateBasepath . $viewFilePath); 
+        include($this->templateBasePath . $viewFilePath); 
         $CONTENT_DATA = ob_get_contents(); // записываем перехваченное в переменную
         ob_end_clean(); // отключаем перехват
         
@@ -90,7 +90,7 @@ class View
      * 
      * @param string Путь к целевой странице
      */
-    public function renderPartition($path)
+    public function renderPartition($path): void
     {
         extract($this->vars);  
         include($this->templateBasePath . $path);

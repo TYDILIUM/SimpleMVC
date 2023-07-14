@@ -92,7 +92,7 @@ abstract class User extends Model
     /**
      * Удаляет из User-а и Сессии данные об актуальной роли и имени пользователя
      */
-    public function logout()
+    public function logout(): true
     {
         $this->role = "";
         $this->userName = "";
@@ -139,7 +139,7 @@ abstract class User extends Model
      * @param type $route
      * @param type $elementHTML
      */
-    public function returnIfAllowed($route, $elementHTML) 
+    public function returnIfAllowed($route, $elementHTML): void 
     {
         if($this->isAllowed($route)) {
             echo $elementHTML;

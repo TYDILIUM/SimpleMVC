@@ -33,10 +33,9 @@ class FileUploader
      * @param type $files         -- массив в файлов как в $_FILES
      * @param type $this->basePath      -- Базовый путь (до $addtionalPath)
      * @param type $addtionalPath -- без слэгэй в начале и конце. Пусть начаная с которого нужно вернуть путь к загруженному файлу
-     * @return type
      * @throws \Exception
      */
-    public function uploadToRelativePath($files, $addtionalPath)
+    public function uploadToRelativePath($files, $addtionalPath): ?array
     {
 //        \ItForFree\SimpleMVC\DebugPrinter::debug($files); die();
         $this->basePath = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'uploads';
@@ -71,7 +70,7 @@ class FileUploader
      * @param type $uploadDirPath
      * @throws \Exception
      */
-    public function uploadFile($tmpFileName, $fileName, $uploadDirPath)
+    public function uploadFile($tmpFileName, $fileName, $uploadDirPath): void
     {
         $this->createDirIfNotExists($uploadDirPath);
         $filePath = $uploadDirPath . '/' . $fileName;        
@@ -86,7 +85,7 @@ class FileUploader
      * 
      * @param type $path
      */
-    public function createDirIfNotExists($path)
+    public function createDirIfNotExists($path): void
     {
         //echo $path; die();
         if (!file_exists($path)) {
