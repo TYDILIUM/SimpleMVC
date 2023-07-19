@@ -7,7 +7,7 @@ namespace ItForFree\SimpleMVC\exceptions;
 class SmvcRoutingException extends SmvcUsageException
 {
     // Переопределим исключение так, что параметр message станет обязательным
-    public function __construct($message, $code = 404, \Exception $previous = null) {
+    public function __construct(string $message, int $code = 404, \Exception $previous = null) {
         // некоторый код 
 
         // убедитесь, что все передаваемые параметры верны

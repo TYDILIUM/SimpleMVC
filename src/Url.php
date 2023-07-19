@@ -15,7 +15,7 @@ class Url
         return $getValue;
     }
          
-    public static function link($route): string
+    public static function link(string $route): string
     {
         $path = "/index.php?route=$route"; 
         return $path;

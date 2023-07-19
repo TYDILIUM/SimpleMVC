@@ -26,9 +26,8 @@ class Router
     * Вернёт объект юзера
     * 
     * @staticvar type $instance
-    * @return \static
     */
-    public static function get()
+    public static function get(): Router
     {
         static $instance = null; // статическая переменная
         if (null === $instance) { // проверка существования
@@ -47,10 +46,9 @@ class Router
      * 
      * @param srting $route маршрут: Любая строка (подразумевается, что это url или фрагмент),
      *	    по которой можно определить вызываемый контроллер (класс) и его действие (метод)
-     * @return $this
      * @throws SmvcRoutingException
      */
-    public function callControllerAction($route, $status=null)
+    public function callControllerAction(string $route, ?string $status=null): object
     {
         $controllerName = $this->getControllerClassName($route);
         
@@ -89,9 +87,8 @@ class Router
      * Сформаирует имя класса контроллера, на основании переданного маршрута
      * 
      * @param string $route маршрут, запрошенный пользотелем
-     * @return  string
      */
-    public function getControllerClassName($route)
+    public function getControllerClassName(string $route): string
     {
         $result = self::$defaultControllerName;
                 
@@ -121,9 +118,8 @@ class Router
      * Формирует полное имя метода контроллера по  переданному маршруту
      * 
      * @param  string $route маршрут
-     * @return string
      */
-    public function getControllerActionName($route)
+    public function getControllerActionName(string $route): string
     {
         $result =  'index';
          
@@ -140,7 +136,7 @@ class Router
      * Формирует имя метода контроллера по GET-параметру
      * @param type $action -- строка GET-параметр
      */
-    public function getControllerMethodName($action): string
+    public function getControllerMethodName(string $action): string
     {
         return $action . 'Action';
     }
@@ -148,9 +144,8 @@ class Router
     /**
      * Возвращает путь до файла контроллера относительно корневой дирректории
      * @param type $controllerName
-     * @return string
      */
-    private function getControllerFileName($controllerName)
+    private function getControllerFileName(string $controllerName): string
     {
         $urlFragments = explode('\\', $controllerName);
         $res = implode('/', $urlFragments) . '.php';

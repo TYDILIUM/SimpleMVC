@@ -33,9 +33,8 @@ trait AccessControl {
 
     /**
      * Запускает метод класса ***Controller полученный через GET-параметр
-     * @param type 
      */
-    public function callAction($route): ?string // ???????  
+    public function callAction(string $route): void  
     {
         $actionName = $this->getControllerActionName($route);
 
@@ -64,7 +63,7 @@ trait AccessControl {
      * @return boolean разрешено ли текущему пользователю выполнять данное действие, 
      *    
      */
-    public function IsEnabled($actionName)
+    public function IsEnabled(string $actionName): bool
     {
         $currentRole = Config::getObject('core.user.class')->role;
         if (!empty($this->rules)) {
@@ -87,10 +86,11 @@ trait AccessControl {
      * 
      * @param string $actionName    имя действия
      * @param stringe $role         роль, доступ для котрой нао проверить
-     * @param string $rules         массив правил подобный примерам yii2 @see https://www.yiiframework.com/doc/guide/2.0/en/security-authorization
+     * @param array $rules         массив правил подобный примерам yii2 @see https://www.yiiframework.com/doc/guide/2.0/en/security-authorization
      * @param string $guestRoleName имя проли неавторизованного пользователя, по умолчанию guest
      */
-    protected function IsEnabledInYii2Style($actionName, $role, $rules, $guestRoleName = 'guest'): bool
+    protected function IsEnabledInYii2Style(string $actionName, string $role, 
+	    array $rules, string $guestRoleName = 'guest'): bool
     {
         $allow = false;
         $result = $allow;
@@ -118,11 +118,9 @@ trait AccessControl {
      * ? -- для пользователя с ролью как $guestRoleName (условный гость - -т.е. неавторизованный пользователь)
      * @ -- для пользователя с ролью НЕ как $guestRoleName (условно -- все остальные пользователи, авторизованные, не гости)
      * 
-     * @param string $role
-     * @param array $roleList
      * @param string $guestRoleName имя проли неавторизованного пользователя, по умолчанию guest
      */
-    protected function isRoleInList(string $role, array $roleList, $guestRoleName = 'guest'): bool
+    protected function isRoleInList(string $role, array $roleList, string $guestRoleName = 'guest'): bool
     {
         
         $result =  in_array($role, $roleList) 
@@ -136,7 +134,7 @@ trait AccessControl {
      * Возвращает массив с правилами данного контроллера 
      * @return array['action'] = 'user'
      */
-    public function getControllerRules()
+    public function getControllerRules(): array
     {
         return $this->rules;
     }

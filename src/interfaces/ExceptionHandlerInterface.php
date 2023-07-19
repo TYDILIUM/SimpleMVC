@@ -7,9 +7,7 @@ namespace ItForFree\SimpleMVC\interfaces;
 interface ExceptionHandlerInterface
 {
     /**
-     * Метод для обработки перехваченной ошибки
-     * 
-     * @param \Exception $exception
+     * Метод для обработки перехваченной ошибки     
      */
-    public function handleException(\Exception $exception);
+    public function handleException(\Exception $exception): void;
 }

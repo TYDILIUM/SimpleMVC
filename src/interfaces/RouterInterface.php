@@ -11,6 +11,6 @@ interface RouterInterface
      * 
      * @param type $url
      */
-    public function callScript($url);
+    public function callScript(string $url): void;
     
 }

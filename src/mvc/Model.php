@@ -33,7 +33,7 @@ class Model
      * 
      * @param array $data необязательный массив для инициаллизации свойств объекта модели
      */
-    public function __construct($data = null)
+    public function __construct(?array $data = null)
     {
         // $this->setPdoSettings();
         if (is_array($data)) {
@@ -45,7 +45,6 @@ class Model
      * Магический метод для перехвата обращения к свойствам
      * 
      * @staticvar type $pdo
-     * @param string $name
      */
     public function  __get (string $name): \PDO
     {
@@ -67,7 +66,7 @@ class Model
      * @param object $object объект, свойства которого требуется заполнить значениями из массива $vars
      * @param array $vars  ассоциативный массив значений
      */
-    private function setObjectVars($object, array $vars): void 
+    private function setObjectVars(object $object, array $vars): void 
     {
         $has = get_object_vars($object);
         foreach ($has as $name => $oldValue) {
@@ -98,7 +97,7 @@ class Model
      * @param int    $id         id строки (кортежа)
      * @param string $tableName  имя таблицы (необязатлеьный параметр)
      */
-    public function getById($id, $tableName = ''): ?Model
+    public function getById(int $id, string $tableName = ''): ?Model
     {  
         $tableName = !empty($tableName) ? $tableName : $this->tableName;
         
@@ -122,9 +121,8 @@ class Model
      * Извлечет данные и вернет массив моделей из базы данных.
      * 
      * @param int $numRows ограничение на число строк
-     * @return array
      */
-    public function getList($numRows=1000000)  
+    public function getList(int $numRows=1000000): array  
     {
         $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM $this->tableName
                 ORDER BY  $this->orderBy LIMIT :numRows";
@@ -154,7 +152,7 @@ class Model
      * @param int $limit       число элементов на странице
      * @return array           массив  кортежей из БД
      */
-    public function getPage($pageNumber = 1, $limit = 2)
+    public function getPage(int $pageNumber = 1, int $limit = 2): array
     {
         $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM $this->tableName
                 ORDER BY  $this->orderBy LIMIT :limit OFFSET :offset";
@@ -186,7 +184,7 @@ class Model
      * 
      * @param array $arr массив значений
      */
-    public function loadFromArray($arr): Model
+    public function loadFromArray(array $arr): Model
     {
         $modelClassName = static::class;
         return new $modelClassName($arr);

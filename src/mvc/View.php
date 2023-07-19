@@ -37,7 +37,7 @@ class View
      * 
      * @param string $layoutPath путь к шаблону относительно $this->layoutsBasePath
      */
-    public function __construct($layoutPath = 'default.php') {
+    public function __construct(string $layoutPath = 'default.php') {
         $this->templateBasePath = 
 		rpath(Config::get('core.mvc.views.base-template-path'));
         $this->layoutsBasePath = rpath(Config::get('core.mvc.views.base-layouts-path'));
@@ -51,7 +51,7 @@ class View
      * @param string $name  имя будущей переменной в представлени
      * @param mixed $value  значение
      */
-    public function addVar(string $name, $value): void
+    public function addVar(string $name, mixed $value): void
     {
         $this->vars[$name] = $value;
     }
@@ -64,7 +64,7 @@ class View
      * @param string $viewFilePath         Путь к файду представления относительно базовой папки представлений
      * @param string $layoutPath  Относитлеьный путь к файлу шаблона -- передавайте только если требуется переопределить шаблон, который передаётся в конструктор представления
      */
-    public function render($viewFilePath, $layoutPath = ''): void
+    public function render(string $viewFilePath, string $layoutPath = ''): void
     {
         if($layoutPath) {
            $layoutPath = $this->layoutsBasePath . $layoutPath; 
@@ -90,7 +90,7 @@ class View
      * 
      * @param string Путь к целевой странице
      */
-    public function renderPartition($path): void
+    public function renderPartition(string $path): void
     {
         extract($this->vars);  
         include($this->templateBasePath . $path);
