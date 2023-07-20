@@ -23,7 +23,7 @@ abstract class User extends Model
     
     /**
      * Для использования роутера
-     * @var type \ItForFree\SimpleMVC\Router::class
+     * @var \ItForFree\SimpleMVC\Router::class
      */
     public $router = null;
     

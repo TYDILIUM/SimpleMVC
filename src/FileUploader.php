@@ -16,7 +16,7 @@ class FileUploader
     /**
      * массив с относительными именами файлов
      * 
-     * @var type 
+     * @var array 
      */
     public $uploadedFileNames = []; 
     
@@ -30,9 +30,9 @@ class FileUploader
      * $this->basePath + $addtionalPath
      *  --  и вернёт массив путей к файлам, начинающийся с $addtionalPath
      * 
-     * @param type $files         -- массив в файлов как в $_FILES
-     * @param type $this->basePath      -- Базовый путь (до $addtionalPath)
-     * @param type $addtionalPath -- без слэгэй в начале и конце. Пусть начаная с которого нужно вернуть путь к загруженному файлу
+     * @param array $files         -- массив в файлов как в $_FILES
+     * @param string $this->basePath      -- Базовый путь (до $addtionalPath)
+     * @param string $addtionalPath -- без слэгэй в начале и конце. Пусть начаная с которого нужно вернуть путь к загруженному файлу
      * @throws \Exception
      */
     public function uploadToRelativePath(array $files, string $addtionalPath): array
@@ -65,9 +65,9 @@ class FileUploader
         /**
      * Загрузит один файл
      * 
-     * @param type $tmpFileName
-     * @param type $fileName
-     * @param type $uploadDirPath
+     * @param string $tmpFileName
+     * @param string $fileName
+     * @param string $uploadDirPath
      * @throws \Exception
      */
     public function uploadFile(string $tmpFileName, string $fileName, string $uploadDirPath): void

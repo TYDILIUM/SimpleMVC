@@ -38,7 +38,7 @@ class Application
     /**
      * Метод для получения текущего объекта приложения
      * 
-     * @staticvar type $instance
+     * @staticvar Application $instance
      */
     public static function get(): Application
     {
@@ -198,11 +198,9 @@ class Application
         return $pathParams[0] . '.' . $pathParams[1] . '.' . $additionPart;
     }
 
-    protected static function isAlias(string $param): ?true 
+    protected static function isAlias(string $param): bool 
     {
-	if (strpos($param, '@') === 0) {
-	    return true;
-	}
+	return strpos($param, '@') === 0;	
     }
 
     protected static function getPablicParams(string $inConfigArrayPath): array 

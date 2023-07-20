@@ -16,7 +16,7 @@ class Session
     /**
     * Вернёт объект класса Session
     * 
-    * @staticvar type $instance
+    * @staticvar Session $instance
     */
     public static function get(): Session 
     {

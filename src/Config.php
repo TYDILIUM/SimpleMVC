@@ -23,7 +23,7 @@ class Config
      * 
      * @param string $inConfigArrayPath ключ в виде строки, разделёной точками -- путь в массиве
      */
-    public static function getObject(string $inConfigArrayPath): mixed
+    public static function getObject(string $inConfigArrayPath): object
     {
         return Application::getConfigObject($inConfigArrayPath);
     }

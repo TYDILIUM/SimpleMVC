@@ -25,7 +25,7 @@ class Router
    /**
     * Вернёт объект юзера
     * 
-    * @staticvar type $instance
+    * @staticvar Router $instance
     */
     public static function get(): Router
     {
@@ -134,7 +134,7 @@ class Router
     
    /**
      * Формирует имя метода контроллера по GET-параметру
-     * @param type $action -- строка GET-параметр
+     * @param string $action -- строка GET-параметр
      */
     public function getControllerMethodName(string $action): string
     {
@@ -143,7 +143,7 @@ class Router
     
     /**
      * Возвращает путь до файла контроллера относительно корневой дирректории
-     * @param type $controllerName
+     * @param string $controllerName
      */
     private function getControllerFileName(string $controllerName): string
     {

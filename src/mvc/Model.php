@@ -44,7 +44,7 @@ class Model
     /**
      * Магический метод для перехвата обращения к свойствам
      * 
-     * @staticvar type $pdo
+     * @staticvar \PDO $pdo
      */
     public function  __get (string $name): \PDO
     {

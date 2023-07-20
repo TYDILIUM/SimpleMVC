@@ -9,7 +9,7 @@ interface RouterInterface
 {
     /**
      * 
-     * @param type $url
+     * @param string $url
      */
     public function callScript(string $url): void;
     
