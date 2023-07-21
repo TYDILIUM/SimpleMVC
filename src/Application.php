@@ -38,10 +38,9 @@ class Application
     /**
      * Метод для получения текущего объекта приложения
      * 
-     * @staticvar type $instance
-     * @return ItForFree\SimpleMVC\Applicaion объект приложения
+     * @staticvar Application $instance
      */
-    public static function get()
+    public static function get(): Application
     {
         static $instance = null; // статическая переменная
         if (null === $instance) { // проверка существования
@@ -50,13 +49,13 @@ class Application
         return $instance;
     }
     
-    public static function addElementToConteiner($configPath, $element)
+    public static function addElementToConteiner(string $configPath, mixed $element): void
     {
         
         self::get()->containerElements['elements'][$configPath] = $element;
     }
 	
-	public static function addObjectToConteiner($configPath, $object)
+	public static function addObjectToConteiner(string $configPath, object $object): void
     {
         self::get()->containerElements['objects'][$configPath] = $object;
     }
@@ -66,10 +65,9 @@ class Application
      * именно этот метод должно вызвать приложение, использущее SimpleMVC 
      * для запуска системы
      * 
-     * @return $this
      * @throws SmvcCoreException
      */
-    public function run() {
+    public function run(): object {
         
         $exceptionHandler = new ExceptionHandler();
         try{
@@ -94,9 +92,8 @@ class Application
      * Устанавливает конфигурацию приложения из массива
      * 
      * @param  array $config многомерный массив конфигурации приложения
-     * @return $this
      */
-    public function setConfiguration($config)
+    public function setConfiguration(array $config): object
     {
         $this->config = new Dot($config);
         return $this;
@@ -107,9 +104,8 @@ class Application
      * 
      * @param string $inConfigArrayPath ключ в виде строки, разделёной точками -- путь в массиве
      * $withException - флаг, кторый определяет омежт ли бросать исключения метод или нет
-     * @return mixed
      */
-    public static function getConfigElement($inConfigArrayPath, $withException = true)
+    public static function getConfigElement(string $inConfigArrayPath, bool $withException = true): mixed
     {
 		if (empty(self::get()->config)) {
             throw new SmvcUsageException('Не задан конфигурационный массив приложения!');
@@ -134,9 +130,9 @@ class Application
      * Создаст и вернёт объект по его имени из массива
      * 
      * @param string $inConfigArrayPath ключ в виде строки, разделёной точками -- путь в массиве
-     * @return mixed                    $a[] = $param;
+     * $a[] = $param;
      */
-    public static function getConfigObject($inConfigArrayPath)
+    public static function getConfigObject(string $inConfigArrayPath): mixed
     {
         $publicParams = array();
         $constructParams = array();
@@ -167,10 +163,10 @@ class Application
     
     
     protected static function getInstanceOrSingletone(
-		$className, 
-		$constructParams = [],
-		$publicParams = [], 
-		$singletoneInstanceAccessStaticMethodName = 'get')
+		string $className, 
+		array $constructParams = [],
+		array $publicParams = [], 
+		string $singletoneInstanceAccessStaticMethodName = 'get'): object
     { 
        $result = null;
        if (\ItForFree\rusphp\PHP\Object\ObjectClass\Constructor::isPublic($className)) {
@@ -195,19 +191,19 @@ class Application
        return $result;
     }
     
-    protected static function getPathParams($PathClassName, $additionPart) 
+    protected static function getPathParams(string $PathClassName, string $additionPart): string 
     {
         
         $pathParams = explode('.', $PathClassName);
         return $pathParams[0] . '.' . $pathParams[1] . '.' . $additionPart;
     }
 
-    protected static function isAlias($param)
+    protected static function isAlias(string $param): bool 
     {
-        if(strpos($param, '@') === 0) return true;
+	return strpos($param, '@') === 0;	
     }
-    
-    protected static function getPablicParams($inConfigArrayPath) 
+
+    protected static function getPablicParams(string $inConfigArrayPath): array 
     {
         $publicParams = array();
         $paramsPath = static::getPathParams($inConfigArrayPath, 'params');
@@ -226,7 +222,7 @@ class Application
         return $publicParams;                    
     }
     
-    protected static function getCounstractParams($inConfigArrayPath)
+    protected static function getCounstractParams(string $inConfigArrayPath): array
     {
         $readyCounstractParams = array();
         $pathConstructParams = static::getPathParams($inConfigArrayPath, 'construct');
@@ -250,7 +246,7 @@ class Application
      * Возвращает объект или элемент, созданный
      * на основе переданного параметр
      */
-    public static function getInstanceByAlias($param)
+    public static function getInstanceByAlias(string $param): mixed
     {
         //возвращает объект или элемент взависимости от того, есть ли в конфиге у переданного пути часть "класс".
         //Вызывает isClassOrSimpleElement как раз для этой проверки
@@ -268,7 +264,7 @@ class Application
      * Проверяет: можно ли создать объект класса по переданному пути или нет
      * Возвращает true/false
      */
-    public static function isClassOrSimpleElement($paramPath)
+    public static function isClassOrSimpleElement(array $paramPath): bool
     {       
         $pathToClass = implode('.', $paramPath) . '.class';
         $class = self::getConfigElement($pathToClass, false);

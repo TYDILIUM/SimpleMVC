@@ -23,12 +23,13 @@ abstract class User extends Model
     
     /**
      * Для использования роутера
-     * @var type \ItForFree\SimpleMVC\Router::class
+     * @var \ItForFree\SimpleMVC\Router::class
      */
     public $router = null;
     
 
-    public function __construct($data = null, $session = null, $router = null)
+    public function __construct(?array $data = null, 
+	    ?Session $session = null, ?Router $router = null)
     {
         $this->router = $router;
         $this->Session = $session;
@@ -54,9 +55,8 @@ abstract class User extends Model
      * 
      * @param srting $login имя пользователя
      * @param string $pass  пароль
-     * @return boolean
      */
-    public function login($login, $pass)
+    public function login(string $login, string $pass): bool
     {
         if ($this->checkAuthData($login, $pass)) {
             
@@ -73,26 +73,19 @@ abstract class User extends Model
     
     /**
      * Получить роль по имени пользователя
-     * 
-     * @param string $userName
-     * @return string
      */
-    protected abstract function getRoleByUserName($userName);
+    protected abstract function getRoleByUserName(string $userName): string;
     
     /**
      * Проверяет, можно ли авторизировать пользователя
      *  с данным логином и паролем
-     * 
-     * @param string $login
-     * @param string $pass
-     * @return boolean
      */
-    protected abstract function checkAuthData($login, $pass);
+    protected abstract function checkAuthData(string $login, string $pass): bool;
     
     /**
      * Удаляет из User-а и Сессии данные об актуальной роли и имени пользователя
      */
-    public function logout()
+    public function logout(): true
     {
         $this->role = "";
         $this->userName = "";
@@ -112,7 +105,7 @@ abstract class User extends Model
      * @return boolean  доступен ли он данном пользователю
      * @throws SmvcUsageException
      */
-    public function isAllowed($route)
+    public function isAllowed(string $route): bool
     {
         $result = true;
 //        $this->router = Config::getObject('core.router.class');
@@ -134,12 +127,7 @@ abstract class User extends Model
         return $result;
     }
  
-    /**
-     * 
-     * @param type $route
-     * @param type $elementHTML
-     */
-    public function returnIfAllowed($route, $elementHTML) 
+    public function returnIfAllowed(string $route, string $elementHTML): void 
     {
         if($this->isAllowed($route)) {
             echo $elementHTML;
@@ -152,9 +140,8 @@ abstract class User extends Model
      * влияющим на доступ пользоватлея к маршруту
      * 
      * @param  string $route  маршрут
-     * @return array
      */
-    public function explainAccess($route)
+    public function explainAccess(string $route): array
     {
 //        $Router = Config::getObject('core.router.class');
         $role = $this->role;

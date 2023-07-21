@@ -31,10 +31,8 @@ class Controller
      * (устанавливает заголовок location)
      * 
      * @todo Проверить не нужен ли exit после установления заголовка.
-     * 
-     * @param string $path
      */
-    public function redirect($path) { // 302 редирект
+    public function redirect(string $path): void { // 302 редирект
         header("Location: $path");
     }
 }

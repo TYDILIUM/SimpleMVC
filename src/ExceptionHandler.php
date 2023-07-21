@@ -14,8 +14,6 @@ class ExceptionHandler
      * Метод обработки исключения. Проверяет существует ли пользовательский обработчик.
      * Если пользовательский обработчик найден, то исключение передаётся ему на обработку.
      * Если пользовательского обработчика нет то исключение никак не обрабатывается.
-     * @param \Exception $exception
-     * @return void
      * @throws \Exception
      */
     public function handleException(\Exception $exception): void

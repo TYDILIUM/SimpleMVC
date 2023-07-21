@@ -16,10 +16,9 @@ class Session
     /**
     * Вернёт объект класса Session
     * 
-    * @staticvar type $instance
-    * @return \static
+    * @staticvar Session $instance
     */
-    public static function get()
+    public static function get(): Session 
     {
         static $instance = null; // статическая переменная
         if (null === $instance) { // проверка существования

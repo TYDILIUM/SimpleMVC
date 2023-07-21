@@ -4,7 +4,7 @@ namespace ItForFree\SimpleMVC\exceptions;
 class SmvcCoreException extends SmvcException
 {
     // Переопределим исключение так, что параметр message станет обязательным
-    public function __construct($message, $code = 0, \Exception $previous = null) {
+    public function __construct(string $message, int $code = 0, \Exception $previous = null) {
         // некоторый код 
     
         // убедитесь, что все передаваемые параметры верны
