@@ -1,16 +1,10 @@
 <?php
 namespace ItForFree\SimpleMVC;
 
-use ItForFree\SimpleMVC\Config;
-use ItForFree\SimpleMVC\mvc\Model;
-
 /**
  * Абстрактный класс для работы с данными пользователя.
- * 
- * Наследует базовый классс модели, а потому потомки данного класса
- * могут также работать как модели в рамках MVC.
  */
-abstract class User extends Model
+abstract class User
 {
     public $role = null;
     public $userName = null;
@@ -45,8 +39,6 @@ abstract class User extends Model
             $this->role = 'guest';
             $this->userName = 'guest';
         }
-        
-        parent::__construct($data);
     }
         
     /**
@@ -116,7 +108,6 @@ abstract class User extends Model
             throw new SmvcUsageException("Контроллер '$controllerName',"
                     . " соответствущий переданному"
                     . " для контроля доступа маршруту '$route' не найден.");
-            $result = true;
         } else {
         
             $controller = new $controllerName();
@@ -131,7 +122,7 @@ abstract class User extends Model
     {
         if($this->isAllowed($route)) {
             echo $elementHTML;
-        };
+        }
     }
     
     

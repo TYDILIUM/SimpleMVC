@@ -2,10 +2,7 @@
 
 namespace ItForFree\SimpleMVC\mvc;
 
-use ItForFree\SimpleMVC\Config as Config;
 use ItForFree\SimpleMVC\Application;
-use ItForFree\rusphp\Log\SimpleEchoLog;
-//use ItForFree\SimpleMVC\mvc\Model;
 
 /**
  * Базовый класс для модолей: используя конфиг приложения,
