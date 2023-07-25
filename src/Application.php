@@ -67,7 +67,7 @@ class Application
      * 
      * @throws SmvcCoreException
      */
-    public function run(): object {
+    public function run(): Application {
         
         $exceptionHandler = new ExceptionHandler();
         try{
@@ -80,12 +80,11 @@ class Application
                 $Router->callControllerAction($route); // определяем и вызываем нужно действие контроллера
             } else {
                 throw new SmvcCoreException('Не задан конфигурационный массив приложения!');
-            }
-
-            return $this;   
+            }               
         } catch (\Exception $exc) {
             $exceptionHandler->handleException($exc);
         }
+	return $this;
     }
     
     /**
