@@ -20,12 +20,12 @@ class Application
      * 
      * @var ItForFree\rusphp\PHP\ArrayLib\DotNotation\Dot
      */
-    protected $config = null;
+    protected ?Dot $config = null;
 
     /**
      * Кэш контейнера (конфигурируемых компонентов приложения)
      */
-    protected $containerElements = [
+    protected array $containerElements = [
 		'elements' => [],
 		'objects' => [],
 	];

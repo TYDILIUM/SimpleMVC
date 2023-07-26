@@ -11,19 +11,17 @@ class FileUploader
      * Права доступа к папкам по умолчанию
      * @var int 
      */
-    public $defaultFolderPermitions = 0777;
+    public int $defaultFolderPermitions = 0777;
      
     /**
      * массив с относительными именами файлов
-     * 
-     * @var array 
      */
-    public $uploadedFileNames = []; 
+    public array $uploadedFileNames = []; 
     
     /**
      * Путь к корневой директории
      */
-    public $basePath = null;
+    public ?string $basePath = null;
  
     /**
      * Загрузит файлы в папку с адресом 

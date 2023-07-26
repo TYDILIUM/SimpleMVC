@@ -5,7 +5,6 @@ namespace ItForFree\SimpleMVC\traits;
 use ItForFree\SimpleMVC\exceptions\SmvcAccessException;
 use ItForFree\SimpleMVC\exceptions\SmvcUsageException;
 use ItForFree\SimpleMVC\Config;
-use ItForFree\SimpleMVC\exceptions\SmvcException;
 
 /* 
  * Система контроля доступа
@@ -17,14 +16,13 @@ trait AccessControl {
      * @var string Пояснение по результату работы последнего вызова $this->isEnable($actionName)
      * ВНИМАНИЕ: получайте значение сразу после обращения к указанному методу (и точно не "до").
      */
-   public $explanation = 'Решений ещё не принималось';
+    public string $explanation = 'Решений ещё не принималось';
    
     /**
      * Массив, содержащий имена методов, доступных пользователю с данной ролью
      * (должен переопределяться в контроллерах)
-     * @var array 
      */ 
-    protected $rules = [];
+    protected array $rules = [];
     
     public function getRules(): array
     {
@@ -85,7 +83,7 @@ trait AccessControl {
      * Если правила есть ($rules не пустой массив), но доступ для данной роли явно не прописан, то считается что он закрыт.
      * 
      * @param string $actionName    имя действия
-     * @param stringe $role         роль, доступ для котрой нао проверить
+     * @param string $role         роль, доступ для котрой нао проверить
      * @param array $rules         массив правил подобный примерам yii2 @see https://www.yiiframework.com/doc/guide/2.0/en/security-authorization
      * @param string $guestRoleName имя проли неавторизованного пользователя, по умолчанию guest
      */

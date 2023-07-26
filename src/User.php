@@ -6,24 +6,23 @@ namespace ItForFree\SimpleMVC;
  */
 abstract class User
 {
-    public $role = null;
-    public $userName = null;
+    public ?string $role = null;
+    public ?string $userName = null;
     
     /**
      * для хранения объекта обеспечивающего доступ к сессии
      * @var ItForFree\SimpleMVC\Session 
      */
-    public $Session = null;
+    public ?Session $Session = null;
     
     /**
      * Для использования роутера
      * @var \ItForFree\SimpleMVC\Router::class
      */
-    public $router = null;
+    public ?Router $router = null;
     
 
-    public function __construct(?array $data = null, 
-	    ?Session $session = null, ?Router $router = null)
+    public function __construct(?Session $session = null, ?Router $router = null)
     {
         $this->router = $router;
         $this->Session = $session;

@@ -14,17 +14,17 @@ class Model
     /**
      * @var string Имя обрабатываемой таблицы 
      */
-    public $tableName = '';
+    public string $tableName = '';
     
     /**
      *  @var string Имя поля по котору сортируем
      */
-    public $orderBy = '';
+    public string $orderBy = '';
     
     /**
     * @var int ID сущности в базе данных
     */
-    public $id = null;
+    public ?int $id = null;
 
     /**
      * 

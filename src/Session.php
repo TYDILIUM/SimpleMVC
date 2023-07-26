@@ -11,7 +11,7 @@ namespace ItForFree\SimpleMVC;
  */
 class Session 
 {
-    public $session = null; //$_SESSION
+    public ?array $session = null; //$_SESSION
     
     /**
     * Вернёт объект класса Session

@@ -12,13 +12,13 @@ use ItForFree\SimpleMVC\exceptions\SmvcAccessException;
 class Router
 {
     
-    public $baseControllersNamespace = '\\application\\controllers\\';
+    public string $baseControllersNamespace = '\\application\\controllers\\';
 
    /**
     * Имя контроллера, которое надо указывать, если иное не найдено
     * @var string 
     */
-   protected static $defaultControllerName = 'Homepage';
+   protected static string $defaultControllerName = 'Homepage';
    
    
    

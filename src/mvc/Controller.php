@@ -11,13 +11,13 @@ class Controller
     /**
      * @var \ItForFree\SimpleMVC\mvc\View Хранит экземпляр класса View (Представления)
      */
-    public $view = null;
+    public ?View $view = null;
     
     /**
      * @var string Имя (путь относительно базовой папки шаблонов,
      * определяемой в классе конфиге приложения) шаблона (для представлений)
      */
-    public $layoutPath = 'main.php';
+    public string $layoutPath = 'main.php';
     
     /**
      * Создаёт экземпляр класса View для работы с представлениями

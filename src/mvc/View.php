@@ -12,25 +12,25 @@ class View
     /**
      * @var string Стандартный путь к корневому каталогу шаблонов (view) 
      */
-    public $templateBasePath = '/';
+    public string $templateBasePath = '/';
     
     /**
      * @var array Массив, содержащий все переменные программы для их 
      * транспортировки из области видимости контроллеров в представления
      */
-    protected $vars = [];
+    protected array $vars = [];
    
     /**
      * @var string Путь к файлу шаблона внутрь которого и подставляется конкретное представление?
      *  (относительно $this->layoutsBasePath).
      * 
      */
-    public $layoutPath = '/';
+    public string $layoutPath = '/';
     
     /**
      * @var string  полный путь к базовой директории шаблонов
      */
-    public $layoutsBasePath = '/';
+    public string $layoutsBasePath = '/';
     
     /**
      * Создаёт класс представления
