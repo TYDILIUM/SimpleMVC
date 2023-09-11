@@ -9,7 +9,7 @@ use ItForFree\SimpleMVC\exceptions\SmvcAccessException;
  * определить какой контролеер и какое действие надо вызывать.
  */
 
-class Router
+abstract class Router
 {
     
     public string $baseControllersNamespace = '\\application\\controllers\\';
@@ -150,4 +150,9 @@ class Router
         $res = implode('/', $urlFragments) . '.php';
         return $_SERVER['DOCUMENT_ROOT']. '/..'. $res;
     }
+    
+    /**
+     * Получаем URL
+     */
+    abstract public static function getRoute(): string;
 }

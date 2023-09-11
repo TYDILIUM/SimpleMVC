@@ -17,12 +17,12 @@ abstract class User
     
     /**
      * Для использования роутера
-     * @var \ItForFree\SimpleMVC\Router::class
+     * @var \ItForFree\SimpleMVC\WebRouter::class
      */
-    public ?Router $router = null;
+    public ?WebRouter $router = null;
     
 
-    public function __construct(?Session $session = null, ?Router $router = null)
+    public function __construct(?Session $session = null, ?WebRouter $router = null)
     {
         $this->router = $router;
         $this->Session = $session;

@@ -72,9 +72,9 @@ class Application
         $exceptionHandler = new ExceptionHandler();
         try{
             if (!empty($this->config)) {
-                $route = $this->getConfigObject('core.url.class')::getRoute();
+                $route = $this->getConfigObject('core.router.class')::getRoute();
                 /**
-		 * @var \ItForFree\SimpleMVC\Router
+		 * @var \ItForFree\SimpleMVC\WebRouter
 		 */
                 $Router = $this->getConfigObject('core.router.class');
                 $Router->callControllerAction($route); // определяем и вызываем нужно действие контроллера
