@@ -25,7 +25,7 @@ $config = [
             'class' => \application\models\user\ExampleUser::class
         ],
         'router' => [ // подсистема маршрутизация
-            'class' => \ItForFree\SimpleMVC\Router::class,
+            'class' => \ItForFree\SimpleMVC\Router\WebRouter::class,
             'alias' => '@router'
         ],
     ]    

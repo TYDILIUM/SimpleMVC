@@ -1,6 +1,6 @@
 <?php
 
-namespace ItForFree\SimpleMVC\traits;
+namespace ItForFree\SimpleMVC\Traits;
 
 use ItForFree\SimpleMVC\exceptions\SmvcAccessException;
 use ItForFree\SimpleMVC\exceptions\SmvcUsageException;

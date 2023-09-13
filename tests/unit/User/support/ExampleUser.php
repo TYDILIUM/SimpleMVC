@@ -4,16 +4,16 @@ namespace application\models\user;
 
 class ExampleUser extends \ItForFree\SimpleMVC\User 
 {
-    public function __construct($data = null, $session = null, $router = null)
+    public function __construct($session = null, $router = null)
     {
-        parent::__construct($data, $session, $router); 
+        parent::__construct($session, $router); 
     }
     
-    protected function checkAuthData($login, $pass) 
+    protected function checkAuthData(string $login, string $pass): bool 
     {
     }
   
-    protected function getRoleByUserName($userName)
+    protected function getRoleByUserName(string $userName): string
     {
     }
 }

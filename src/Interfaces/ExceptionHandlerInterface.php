@@ -1,5 +1,5 @@
 <?php
-namespace ItForFree\SimpleMVC\interfaces;
+namespace ItForFree\SimpleMVC\Interfaces;
 
 /**
  *  Интерфейс для классов обработки ошибок

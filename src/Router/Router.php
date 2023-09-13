@@ -1,5 +1,5 @@
 <?php
-namespace ItForFree\SimpleMVC;
+namespace ItForFree\SimpleMVC\Router;
 
 use ItForFree\SimpleMVC\exceptions\SmvcRoutingException;
 use ItForFree\SimpleMVC\exceptions\SmvcAccessException;

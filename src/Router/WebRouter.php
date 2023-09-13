@@ -1,5 +1,5 @@
 <?php
-namespace ItForFree\SimpleMVC;
+namespace ItForFree\SimpleMVC\Router;
 
 /**
  * Класс-маршрутизатор, его задача по переданной строке (предположительно это какой-то адресе на сайте),

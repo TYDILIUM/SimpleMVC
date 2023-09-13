@@ -22,9 +22,9 @@
         "it-for-free/php-simple-assets": "dev-master"
     },
     "require-dev": {
-        "codeception/codeception": "^4.1",
-        "codeception/module-phpbrowser": "^1.0.0",
-        "codeception/module-asserts": "^1.0.0"
+        "codeception/codeception": "^5.0",
+        "codeception/module-phpbrowser": "^2.0.3",
+        "codeception/module-asserts": "^3.0.0"
     },
     "repositories": [
         {

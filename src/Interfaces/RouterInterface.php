@@ -1,5 +1,5 @@
 <?php
-namespace ItForFree\SimpleMVC\interfaces;
+namespace ItForFree\SimpleMVC\Interfaces;
 
 /**
  * Класс-маршрутизатор

@@ -1,6 +1,7 @@
 <?php
 namespace ItForFree\SimpleMVC;
 
+use ItForFree\SimpleMVC\Router\WebRouter;
 /**
  * Абстрактный класс для работы с данными пользователя.
  */
@@ -17,7 +18,7 @@ abstract class User
     
     /**
      * Для использования роутера
-     * @var \ItForFree\SimpleMVC\WebRouter::class
+     * @var \ItForFree\SimpleMVC\Router\WebRouter::class
      */
     public ?WebRouter $router = null;
     

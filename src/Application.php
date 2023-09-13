@@ -74,7 +74,7 @@ class Application
             if (!empty($this->config)) {
                 $route = $this->getConfigObject('core.router.class')::getRoute();
                 /**
-		 * @var \ItForFree\SimpleMVC\WebRouter
+		 * @var \ItForFree\SimpleMVC\Router\WebRouter
 		 */
                 $Router = $this->getConfigObject('core.router.class');
                 $Router->callControllerAction($route); // определяем и вызываем нужно действие контроллера

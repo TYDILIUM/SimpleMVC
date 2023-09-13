@@ -1,15 +1,15 @@
 <?php
 
-namespace ItForFree\SimpleMVC\mvc;
+namespace ItForFree\SimpleMVC\MVC;
 /**
  * Базовый класс для работы с конроллерами
  */
 class Controller 
 {
-    use \ItForFree\SimpleMVC\traits\AccessControl;
+    use \ItForFree\SimpleMVC\Traits\AccessControl;
     
     /**
-     * @var \ItForFree\SimpleMVC\mvc\View Хранит экземпляр класса View (Представления)
+     * @var \ItForFree\SimpleMVC\MVC\View Хранит экземпляр класса View (Представления)
      */
     public ?View $view = null;
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace ItForFree\SimpleMVC\mvc;
+namespace ItForFree\SimpleMVC\MVC;
 use ItForFree\SimpleMVC\Config;
 
 /**
