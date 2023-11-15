@@ -3,8 +3,8 @@
 namespace ItForFree\SimpleMVC;
 
 use ItForFree\SimpleMVC\Config;
-use ItForFree\SimpleMVC\interfaces\ExceptionHandlerInterface;
-use ItForFree\SimpleMVC\exceptions\SmvcUsageException;
+use ItForFree\SimpleMVC\Interfaces\ExceptionHandlerInterface;
+use ItForFree\SimpleMVC\Exceptions\SmvcUsageException;
 
 class ExceptionHandler
 {
@@ -28,7 +28,7 @@ class ExceptionHandler
             if($thatHandler instanceof ExceptionHandlerInterface){
                 $thatHandler->handleException($exception);
             } else {
-                throw new SmvcUsageException("Обработчик [$exceptionName] должен реализовывать интерфейс ItForFree\SimpleMVC\interfaces\ExceptionHandlerInterface.");
+                throw new SmvcUsageException("Обработчик [$exceptionName] должен реализовывать интерфейс ItForFree\SimpleMVC\Interfaces\ExceptionHandlerInterface.");
             }
             
         } else {

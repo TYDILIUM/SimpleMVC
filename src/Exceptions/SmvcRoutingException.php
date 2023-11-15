@@ -1,5 +1,5 @@
 <?php
-namespace ItForFree\SimpleMVC\exceptions;
+namespace ItForFree\SimpleMVC\Exceptions;
 
 /**
  * Исключения маршрутизации

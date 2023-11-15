@@ -2,8 +2,8 @@
 
 namespace ItForFree\SimpleMVC\Traits;
 
-use ItForFree\SimpleMVC\exceptions\SmvcAccessException;
-use ItForFree\SimpleMVC\exceptions\SmvcUsageException;
+use ItForFree\SimpleMVC\Exceptions\SmvcAccessException;
+use ItForFree\SimpleMVC\Exceptions\SmvcUsageException;
 use ItForFree\SimpleMVC\Config;
 
 /* 

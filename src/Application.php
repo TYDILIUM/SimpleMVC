@@ -3,8 +3,8 @@ namespace ItForFree\SimpleMVC;
 
 use ItForFree\rusphp\PHP\ArrayLib\DotNotation\Dot;
 use ItForFree\SimpleMVC\ExceptionHandler;
-use ItForFree\SimpleMVC\exceptions\SmvcUsageException;
-use ItForFree\SimpleMVC\exceptions\SmvcConfigException;
+use ItForFree\SimpleMVC\Exceptions\SmvcUsageException;
+use ItForFree\SimpleMVC\Exceptions\SmvcConfigException;
 use ItForFree\rusphp\PHP\Object\ObjectFactory;
 use ItForFree\rusphp\PHP\ArrayLib\Structure;
 
@@ -92,9 +92,15 @@ class Application
      * 
      * @param  array $config многомерный массив конфигурации приложения
      */
-    public function setConfiguration(array $config): object
+    public function setConfiguration(array $config, bool $resetContainerCache = true): object
     {
         $this->config = new Dot($config);
+        if ($resetContainerCache) {
+            $this->containerElements = [
+                'elements' => [],
+                'objects' => [],
+            ];
+        }
         return $this;
     }
     

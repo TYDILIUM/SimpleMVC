@@ -1,12 +1,12 @@
 <?php
 namespace ItForFree\SimpleMVC\Router;
 
-use ItForFree\SimpleMVC\exceptions\SmvcRoutingException;
-use ItForFree\SimpleMVC\exceptions\SmvcAccessException;
+use ItForFree\SimpleMVC\Exceptions\SmvcRoutingException;
+use ItForFree\SimpleMVC\Exceptions\SmvcAccessException;
 
 /**
- * Класс-маршрутизатор, его задача по переданной строке (предположительно это какой-то адресе на сайте),
- * определить какой контролеер и какое действие надо вызывать.
+ * Класс-маршрутизатор, его задача по переданной строке,
+ * определить какой контроллер и какое действие надо вызывать.
  */
 
 abstract class Router
@@ -23,17 +23,14 @@ abstract class Router
    
    
    /**
-    * Вернёт объект юзера
+    * Вернёт объект юзера 
     * 
-    * @staticvar Router $instance
+    * @todo Оставлено для обратной совместимости, уходим от паттерна "одиночка",
+    * в дальнейшем лучше перейти на использование обычного конструктора   
     */
     public static function get(): Router
     {
-        static $instance = null; // статическая переменная
-        if (null === $instance) { // проверка существования
-            $instance = new static();
-        }
-        return $instance;
+        return new static();
     }
     
     /** 
@@ -64,18 +61,7 @@ abstract class Router
         $actionName = $this->getControllerActionName($route);
  
         if ($controller->isEnabled($actionName)) {
-            $methodName =  $this->getControllerMethodName($actionName);
-            
-            if (!method_exists($controller, $methodName)) {
-                throw new SmvcRoutingException("Метод контроллера ([$controllerName])"
-                        . " [$methodName] для данного действия [$actionName] не найден.");
-            }
-
-            if($data !== null) {
-                $controller->$methodName($data); // вызываем действие контроллера
-            } else {
-                $controller->$methodName();
-            }
+            $this->runControllerAction($actionName, $controllerName, $controller, $data);
         } else {
             throw  new SmvcAccessException("Доступ к маршруту $route запрещен.");
         }
@@ -144,13 +130,33 @@ abstract class Router
     /**
      * Возвращает путь до файла контроллера относительно корневой дирректории
      */
-    private function getControllerFileName(string $controllerName): string
+    protected function getControllerFileName(string $controllerName): string
     {
+        global $projectRoot;
         $urlFragments = explode('\\', $controllerName);
         $res = implode('/', $urlFragments) . '.php';
-        return $_SERVER['DOCUMENT_ROOT']. '/..'. $res;
+        return $projectRoot ?? ($_SERVER['DOCUMENT_ROOT'] . '/..') . $res;
     }
     
+    /**
+     * Выполнить действие контроллера
+     */
+    public function runControllerAction(string $actionName, string $controllerName,
+            object $controller, mixed $data = null): void {
+        $methodName =  $this->getControllerMethodName($actionName);
+            
+        if (!method_exists($controller, $methodName)) {
+            throw new SmvcRoutingException("Метод контроллера ([$controllerName])"
+		    . " [$methodName] для данного действия [$actionName] не найден.");
+        }
+
+        if($data !== null) {
+            $controller->$methodName($data); // вызываем действие контроллера
+        } else {
+            $controller->$methodName();
+        }
+    }
+
     /**
      * Получаем URL
      */

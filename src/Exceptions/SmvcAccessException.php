@@ -1,5 +1,5 @@
 <?php
-namespace ItForFree\SimpleMVC\exceptions;
+namespace ItForFree\SimpleMVC\Exceptions;
 
 /**
  * Класс исключений, которые следует бросать, при нарушении доступа
