@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=8.2",
         "ext-pdo_mysql": "*",
         "it-for-free/rusphp": "v2.*",
         "it-for-free/php-simple-assets": "dev-master"

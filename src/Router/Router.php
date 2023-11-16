@@ -2,13 +2,11 @@
 namespace ItForFree\SimpleMVC\Router;
 
 use ItForFree\SimpleMVC\Exceptions\SmvcRoutingException;
-use ItForFree\SimpleMVC\Exceptions\SmvcAccessException;
 
 /**
  * Класс-маршрутизатор, его задача по переданной строке,
  * определить какой контроллер и какое действие надо вызывать.
  */
-
 abstract class Router
 {
     
@@ -43,34 +41,11 @@ abstract class Router
      * 
      * @param srting $route маршрут: Любая строка (подразумевается, что это url или фрагмент),
      *	    по которой можно определить вызываемый контроллер (класс) и его действие (метод)
-     * @throws SmvcRoutingException
      */
-    public function callControllerAction(string $route, mixed $data=null): object
-    {
-        $controllerName = $this->getControllerClassName($route);
-        
-        $controllerFile = $this->getControllerFileName($controllerName);
-        if(!file_exists($controllerFile)) {
-            throw new SmvcRoutingException("Файл контроллера [$controllerFile] не найден.");
-        } else {
-            if (!class_exists($controllerName)) {
-                throw new SmvcRoutingException("Контроллер [$controllerName] не найден.");
-            } 
-        } 
-        $controller = new $controllerName();
-        $actionName = $this->getControllerActionName($route);
- 
-        if ($controller->isEnabled($actionName)) {
-            $this->runControllerAction($actionName, $controllerName, $controller, $data);
-        } else {
-            throw  new SmvcAccessException("Доступ к маршруту $route запрещен.");
-        }
-        
-        return $this;
-    }
+    abstract public function callControllerAction(string $route, mixed $data=null): object;
     
     /**
-     * Сформаирует имя класса контроллера, на основании переданного маршрута
+     * Сформирует имя класса контроллера, на основании переданного маршрута
      * 
      * @param string $route маршрут, запрошенный пользотелем
      */
@@ -128,7 +103,7 @@ abstract class Router
     }
     
     /**
-     * Возвращает путь до файла контроллера относительно корневой дирректории
+     * Возвращает путь до файла контроллера относительно корневой директории
      */
     protected function getControllerFileName(string $controllerName): string
     {
@@ -141,9 +116,10 @@ abstract class Router
     /**
      * Выполнить действие контроллера
      */
-    public function runControllerAction(string $actionName, string $controllerName,
-            object $controller, mixed $data = null): void {
+    public function runControllerAction(string $actionName, object $controller, 
+            mixed $data = null): void {
         $methodName =  $this->getControllerMethodName($actionName);
+        $controllerName = '\\' . get_class($controller);
             
         if (!method_exists($controller, $methodName)) {
             throw new SmvcRoutingException("Метод контроллера ([$controllerName])"
@@ -156,7 +132,23 @@ abstract class Router
             $controller->$methodName();
         }
     }
-
+    
+    /**
+     * Проверка существования класса контроллера, получение его объекта 
+     */
+    public function getController(string $route): object {
+        $controllerName = $this->getControllerClassName($route);
+        $controllerFile = $this->getControllerFileName($controllerName);
+        if (!file_exists($controllerFile)) {
+            throw new SmvcRoutingException("Файл контроллера [$controllerFile] не найден.");
+        } else {
+            if (!class_exists($controllerName)) {
+                throw new SmvcRoutingException("Контроллер [$controllerName] не найден.");
+            }
+        }
+        return new $controllerName();
+    }
+    
     /**
      * Получаем URL
      */

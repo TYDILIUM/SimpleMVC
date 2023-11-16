@@ -17,20 +17,9 @@ class ConsoleRouter extends Router
 
     public function callControllerAction(string $route, mixed $data = null): object
     {
-        $controllerName = $this->getControllerClassName($route);
-        
-        $controllerFile = $this->getControllerFileName($controllerName);
-        if(!file_exists($controllerFile)) {
-            throw new SmvcRoutingException("Файл контроллера [$controllerFile] не найден.");
-        } else {
-            if (!class_exists($controllerName)) {
-                throw new SmvcRoutingException("Контроллер [$controllerName] не найден.");
-            } 
-        } 
-        $controller = new $controllerName();
+        $controller = $this->getController($route);
         $actionName = $this->getControllerActionName($route);
-	$this->runControllerAction($actionName, $controllerName, $controller, $data);
-        
+        $this->runControllerAction($actionName, $controller, $data);        
         return $this;
     }
 }
