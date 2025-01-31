@@ -33,3 +33,4 @@ git fetch iff && git merge iff/master && git push
 ## TODO
 
 * Переделать ключи elements и objects в кэше контейнера на энам (ENUM перечислимый тип).
+* git clone https://github.com/TYDILIUM/ton-assets.git
